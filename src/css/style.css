@@ -5,7 +5,7 @@ body {
 }
 
 body {
-  background: #ee9ca7;
+  background: #3791f9;
 }
 
 #cake {
@@ -141,12 +141,74 @@ body {
   }
 }
 .text {
-  color: #8b6a60;
+  color: #fff;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
   font-style: italic;
   text-align: center;
+  padding-bottom: 10em;
 }
 .text h1 {
   font-size: 1.4em;
+}
+
+/* 雪花部分 */
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.snow-body canvas {
+  position: absolute;
+  top:0;
+  left:0;
+  z-index: -1;
+}
+
+#cake-wrap {
+  position: absolute;
+  top:50%;
+  left:50%;
+  width:100%;
+  overflow: hidden;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+}
+
+/* 音乐播放 */
+
+@-webkit-keyframes rotating {
+	0% {
+		transform: rotate(0deg)
+	}
+	to {
+		transform: rotate(1turn)
+	}
+}
+
+@keyframes rotating {
+	0% {
+		transform: rotate(0deg)
+	}
+	to {
+		transform: rotate(1turn)
+	}
+}
+
+.bgm-btn.rotate {
+  -webkit-animation: rotating 1.2s linear infinite;
+  animation: rotating 1.2s linear infinite;
+}
+
+.bgm-btn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 200;
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-image: url(../images/bgmBtn-fbd2dc.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
 }
