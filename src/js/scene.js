@@ -42,9 +42,9 @@ function init() {
 
   container.appendChild(renderer.domElement);
 
-  document.addEventListener('mousemove', onDocumentMouseMove, false);
-  document.addEventListener('touchstart', onDocumentTouchStart, false);
-  document.addEventListener('touchmove', onDocumentTouchMove, false);
+  container.addEventListener('mousemove', onDocumentMouseMove, false);
+  container.addEventListener('touchstart', onDocumentTouchStart, false);
+  container.addEventListener('touchmove', onDocumentTouchMove, false);
 
   setInterval(loop, 1000 / 60);
 }

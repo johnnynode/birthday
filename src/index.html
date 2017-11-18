@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>生日快乐🍰</title>
+  <title>生日快乐 🍰</title>
   <meta name="viewport" content="initial-scale=1, user-scalable=no, width=device-width">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
@@ -175,47 +175,49 @@
     </svg>
     <div class="text">
       <br>
-      <h1>Happy Birthday To You !</h1>
+      <h1>Happy Birthday!</h1>
     </div>
   </div>
   <div id="music" class="bgm-btn">
-    <audio loop="" src="audio/lxy.mp3" preload=""></audio>
+    <audio id="musicAudio" loop="" autoplay="" preload="" src="audio/lxy.mp3"></audio>
   </div>
   <script type="text/javascript" src="js/svg.js"></script>
   <script type="text/javascript" src="js/threeCanvas.js"></script>
   <script type="text/javascript" src="js/snow.js"></script>
   <script type="text/javascript" src="js/scene.js"></script>
-  <script src='js/zepto.min.js'></script>
 </body>
-  <script>
-    // 页面加载
-    $(function(){
-      var music = $('#music');
-      var musicAudio = $('#music audio');
-      music.addClass("rotate");
-      musicAudio[0].autoplay = true; // 自动播放
-      var musicFlag = false;
+<script>
+  // 页面加载
+  var music = document.getElementById('music');
+  var musicAudio = document.getElementById('musicAudio');
+  musicAudio.play(); // 自动播放
+  var musicFlag = false;
 
-      music.on('click',function(e){
-        var t = setTimeout(function(){
-          t = null;
-          musicFlag ? musicAudio[0].pause() : musicAudio[0].play();
-          musicFlag ? music.removeClass("rotate") : music.addClass("rotate");
-        });
-      });
-
-      musicAudio.on('playing',function(){
-        musicFlag = true;
-      });
-
-      musicAudio.on('pause',function(){
-        musicFlag = false;
-      });
-
-      musicAudio.on('play',function(){
-        musicFlag = true;
-      });
+  music.addEventListener('click', function (e) {
+    e.preventDefault();
+    var t = setTimeout(function () {
+      t = null;
+      musicFlag ? musicAudio.pause() : musicAudio.play();
+      music.setAttribute("class", musicFlag ? "bgm-btn" : "bgm-btn rotate");
     });
-  </script>
+  }, false);
+
+  musicAudio.addEventListener('playing', function (e) {
+    e.preventDefault();
+    music.setAttribute("class", "bgm-btn rotate");
+    musicFlag = true;
+
+  }, false);
+
+  musicAudio.addEventListener('pause', function (e) {
+    e.preventDefault();
+    musicFlag = false;
+  }, false);
+
+  musicAudio.addEventListener('play', function (e) {
+    e.preventDefault();
+    musicFlag = true;
+  }, false);
+</script>
 
 </html>
