@@ -6,6 +6,7 @@ var plumber = require('gulp-plumber');
 var runSequence = require('run-sequence');
 var watch = require('gulp-watch');
 var concat = require('gulp-concat');
+var order = require("gulp-order");
 var cleanCSS = require('gulp-clean-css');
 var imagemin = require('gulp-imagemin'); // 压缩图片
 var htmlmin = require('gulp-htmlmin'); // 压缩html
@@ -22,105 +23,121 @@ var distPath = './dist';
 
 // 使用connect启动一个Web服务器
 gulp.task('connect', function () {
-    connect.server({
-        root: './src',
-        livereload: true,
-        port: 9000,
-        middleware: function (connect, opt) {
-            return [
-            ]
-        }
-    });
+  connect.server({
+    root: './src',
+    livereload: true,
+    port: 9000,
+    middleware: function (connect, opt) {
+      return []
+    }
+  });
 });
 
 gulp.task('watch', function () {
-    gulp.src(srcPath)
-        .pipe(plumber())
-        .pipe(watch(srcPath))
-        .pipe(connect.reload());
+  gulp
+    .src(srcPath)
+    .pipe(plumber())
+    .pipe(watch(srcPath))
+    .pipe(connect.reload());
 });
 
 // 打开浏览器
 gulp.task('open-browser', function () {
-    var platform = process.platform;
-    var shellStr1 = "open -a '/Applications/Google Chrome.app' 'http://localhost:9000'";
-    var shellStr2 = "start http://localhost:9000";
-    // 打开浏览器方法：
-    var openFunc = function (str, flag) {
-        // 执行并对异常处理
-        if (sh.exec(str).code !== 0) {
-            sh.echo(flag + '下打开浏览器失败,建议您安装chrome并设为默认浏览器!');
-            sh.exit(1);
-        }
-    };
-    if (platform === 'darwin') {
-        openFunc(shellStr1, 'Mac');
-    } else if (platform === 'win32' || platform === 'win64') {
-        openFunc(shellStr2, 'Windows');
-    } else {
-        sh.echo('现在只支持Mac和windows系统!如果未打开页面，请确认安装chrome并设为默认浏览器!');
+  var platform = process.platform;
+  var shellStr1 = "open -a '/Applications/Google Chrome.app' 'http://localhost:9000'";
+  var shellStr2 = "start http://localhost:9000";
+  // 打开浏览器方法：
+  var openFunc = function (str, flag) {
+    // 执行并对异常处理
+    if (sh.exec(str).code !== 0) {
+      sh.echo(flag + '下打开浏览器失败,建议您安装chrome并设为默认浏览器!');
+      sh.exit(1);
     }
+  };
+  if (platform === 'darwin') {
+    openFunc(shellStr1, 'Mac');
+  } else if (platform === 'win32' || platform === 'win64') {
+    openFunc(shellStr2, 'Windows');
+  } else {
+    sh.echo('现在只支持Mac和windows系统!如果未打开页面，请确认安装chrome并设为默认浏览器!');
+  }
 });
 
 //运行Gulp时,搭建起跨域服务器
 gulp.task('server', function () {
-    sh.echo("服务器开启!");
-    runSequence(['connect', 'watch'], function () {
-        sh.echo('将要打开浏览器访问：http://localhost:9000');
-        sh.exec('gulp open-browser');
-    });
+  sh.echo("服务器开启!");
+  runSequence([
+    'connect', 'watch'
+  ], function () {
+    sh.echo('将要打开浏览器访问：http://localhost:9000');
+    sh.exec('gulp open-browser');
+  });
 });
 
 // clean task
 gulp.task('clean', function () {
-  return del([
-      distPath + '/**/*'
-  ]);
+  return del([distPath + '/**/*']);
 });
 
 // css task including sass
 gulp.task('css', function () {
-  gulp.src(srcPath + '/css')
-      .pipe(plumber())
-      .pipe(cleanCSS({rebase: false}))
-      .pipe(concat('app.min.css'))
-      .pipe(gulp.dest(distPath + '/css'));
+  return gulp
+    .src(srcPath + '/css/**/*')
+    .pipe(plumber())
+    .pipe(cleanCSS({rebase: false}))
+    .pipe(concat('app.min.css'))
+    .pipe(gulp.dest(distPath + '/css'));
 });
 
 // imagemin images and output them in dist
-gulp.task('imagemin', function () {
-  gulp.src(srcPath + '/images')
-      .pipe(plumber())
-      .pipe(imagemin())
-      .pipe(gulp.dest(distPath + '/images'));
+gulp.task('image', function () {
+  return gulp
+    .src(srcPath + '/images/**/*')
+    .pipe(plumber())
+    .pipe(imagemin())
+    .pipe(gulp.dest(distPath + '/images'));
 });
 
 // js task
 gulp.task('js', function () {
-  gulp.src(srcPath + '/js')
-      .pipe(plumber())
-      .pipe(stripDebug())
-      .pipe(uglify())
-      .pipe(concat('app.bundle.min.js'))
-      .pipe(gulp.dest(distPath + '/js'));
+  return gulp
+    .src([srcPath + '/js/**/*'])
+    .pipe(plumber())
+    .pipe(stripDebug())
+    .pipe(uglify())
+    .pipe(order([
+      "jweixin-1.0.0.js",
+      "threeCanvas.js",
+      "snow.js",
+      "scene.js",
+      "cake.js",
+      "music.js",
+    ]))
+    .pipe(concat('app.bundle.min.js'))
+    .pipe(gulp.dest(distPath + '/js'));
+});
+
+gulp.task('audio', function () {
+  return gulp
+    .src(srcPath + '/audio/**/*')
+    .pipe(plumber())
+    .pipe(gulp.dest(distPath + '/audio'));
 });
 
 // prepare Index.html for dist - ie. using min files
 gulp.task('index', function () {
-  gulp.src(srcPath + '/index.html')
-      .pipe(plumber())
-      .pipe(htmlreplace({
-          'css': 'css/app.min.css',
-          'js': 'js/app.bundle.min.js',
-      }))
-      .pipe(htmlmin({collapseWhitespace: true}))
-      .pipe(gulp.dest(paths.dist + '/.'));
+  return gulp
+    .src(srcPath + '/index.html')
+    .pipe(plumber())
+    .pipe(htmlreplace({'css': 'css/app.min.css', 'js': 'js/app.bundle.min.js'}))
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest(distPath + '/.'));
 });
 
 // 构建任务
-var production = ['index', 'imagemin', 'css', 'js'];
-gulp.task('build',['clean'], function () {
-  runSequence(production, function () {
-      sh.echo('🚂🚂🚂 即将构建完毕！');
+var production = ['audio', 'image', 'css', 'js', 'index'];
+gulp.task('build', ['clean'], function () {
+  return runSequence(production, function () {
+    sh.echo('🚂🚂🚂 构建完毕！');
   });
 });

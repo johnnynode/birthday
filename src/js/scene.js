@@ -4,6 +4,9 @@ var camera;
 var scene;
 var renderer;
 
+var SCREEN_WIDTH = window.innerWidth;
+var SCREEN_HEIGHT = window.innerHeight;
+
 var mouseX = 0;
 var mouseY = 0;
 
