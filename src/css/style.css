@@ -1,265 +1,278 @@
 html,
 body {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 body {
-  background: #3791f9;
-  margin: 0;
-  overflow: hidden;
+    background: #3791f9;
+    margin: 0;
+    overflow: hidden;
 }
 
 #cake {
-  display: block;
-  position: relative;
-  margin: -10em auto 0 auto;
+    display: block;
+    position: relative;
+    margin: -10em auto 0 auto;
 }
+
 
 /* ============================================== Candle
 */
+
 .velas {
-  background: #ffffff;
-  border-radius: 10px;
-  position: absolute;
-  top: 228px;
-  left: 50%;
-  margin-left: -2.5px;
-  margin-top: -8.33333333px;
-  width: 5px;
-  height: 35px;
-  -webkit-transform: translateY(-300px);
-  -ms-transform: translateY(-300px);
-  transform: translateY(-300px);
-  -webkit-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-animation: in 500ms 6s ease-out forwards;
-  animation: in 500ms 6s ease-out forwards;
+    background: #ffffff;
+    border-radius: 10px;
+    position: absolute;
+    top: 228px;
+    left: 50%;
+    margin-left: -2.5px;
+    margin-top: -8.33333333px;
+    width: 5px;
+    height: 35px;
+    -webkit-transform: translateY(-300px);
+    -ms-transform: translateY(-300px);
+    transform: translateY(-300px);
+    -webkit-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-animation: in 500ms 6s ease-out forwards;
+    animation: in 500ms 6s ease-out forwards;
 }
 
 .velas:after,
 .velas:before {
-  background: rgba(255, 0, 0, 0.4);
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2.22222222px;
+    background: rgba(255, 0, 0, 0.4);
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2.22222222px;
 }
 
 .velas:after {
-  top: 25%;
-  left: 0;
+    top: 25%;
+    left: 0;
 }
 
 .velas:before {
-  top: 45%;
-  left: 0;
+    top: 45%;
+    left: 0;
 }
+
 
 /* ============================================== Fire
 */
+
 .fuego {
-  border-radius: 100%;
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  margin-left: -2.2px;
-  width: 6.66666667px;
-  height: 18px;
+    border-radius: 100%;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    margin-left: -2.2px;
+    width: 6.66666667px;
+    height: 18px;
 }
 
 .fuego:nth-child(1) {
-  -webkit-animation: fuego 2s 6.5s infinite;
-  animation: fuego 2s 6.5s infinite;
+    -webkit-animation: fuego 2s 6.5s infinite;
+    animation: fuego 2s 6.5s infinite;
 }
 
 .fuego:nth-child(2) {
-  -webkit-animation: fuego 1.5s 6.5s infinite;
-  animation: fuego 1.5s 6.5s infinite;
+    -webkit-animation: fuego 1.5s 6.5s infinite;
+    animation: fuego 1.5s 6.5s infinite;
 }
 
 .fuego:nth-child(3) {
-  -webkit-animation: fuego 1s 6.5s infinite;
-  animation: fuego 1s 6.5s infinite;
+    -webkit-animation: fuego 1s 6.5s infinite;
+    animation: fuego 1s 6.5s infinite;
 }
 
 .fuego:nth-child(4) {
-  -webkit-animation: fuego 0.5s 6.5s infinite;
-  animation: fuego 0.5s 6.5s infinite;
+    -webkit-animation: fuego 0.5s 6.5s infinite;
+    animation: fuego 0.5s 6.5s infinite;
 }
 
 .fuego:nth-child(5) {
-  -webkit-animation: fuego 0.2s 6.5s infinite;
-  animation: fuego 0.2s 6.5s infinite;
+    -webkit-animation: fuego 0.2s 6.5s infinite;
+    animation: fuego 0.2s 6.5s infinite;
 }
+
 
 /* ============================================== Animation Fire
 */
+
 @-webkit-keyframes fuego {
-  0%, 100% {
-    background: rgba(254, 248, 97, 0.5);
-    -webkit-box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
-    box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
-    -webkit-transform: translateY(0) scale(1);
-    transform: translateY(0) scale(1);
-  }
-
-  50% {
-    background: rgba(255, 50, 0, 0.1);
-    -webkit-box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
-    box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
-    -webkit-transform: translateY(-20px) scale(0);
-    transform: translateY(-20px) scale(0);
-  }
+    0%,
+    100% {
+        background: rgba(254, 248, 97, 0.5);
+        -webkit-box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+        box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+        -webkit-transform: translateY(0) scale(1);
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        background: rgba(255, 50, 0, 0.1);
+        -webkit-box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+        box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+        -webkit-transform: translateY(-20px) scale(0);
+        transform: translateY(-20px) scale(0);
+    }
 }
+
 @keyframes fuego {
-  0%, 100% {
-    background: rgba(254, 248, 97, 0.5);
-    -webkit-box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
-    box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
-    -webkit-transform: translateY(0) scale(1);
-    transform: translateY(0) scale(1);
-  }
+    0%,
+    100% {
+        background: rgba(254, 248, 97, 0.5);
+        -webkit-box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+        box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+        -webkit-transform: translateY(0) scale(1);
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        background: rgba(255, 50, 0, 0.1);
+        -webkit-box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+        box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+        -webkit-transform: translateY(-20px) scale(0);
+        transform: translateY(-20px) scale(0);
+    }
+}
 
-  50% {
-    background: rgba(255, 50, 0, 0.1);
-    -webkit-box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
-    box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
-    -webkit-transform: translateY(-20px) scale(0);
-    transform: translateY(-20px) scale(0);
-  }
-}
 @-webkit-keyframes in {
-  to {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
+    to {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
 }
+
 @keyframes in {
-  to {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
+    to {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
 }
+
 .text {
-  color: #fff;
-  font-family: 'Lato', sans-serif;
-  font-weight: 300;
-  font-style: italic;
-  text-align: center;
-  padding-bottom: 12em;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-style: italic;
+    text-align: center;
+    padding-bottom: 12em;
 }
+
 .text h1 {
-  font-size: 1.4em;
+    font-size: 1.4em;
 }
+
 
 /* 雪花部分 */
 
 .snow-body canvas {
-  position: absolute;
-  top:0;
-  left:0;
-  z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
 #cake-wrap {
-  overflow: hidden;  
-  position: absolute;
-  width:100%;
-  top:50%;
-  left:50%;
-  transform: translate3d(-50%,-50%,0);
-  -webkit-transform: translate3d(-50%,-50%,0);
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -200%, 0);
+    -webkit-transform: translate3d(-50%, -200%, 0);
 }
 
 #cake-wrap.cur {
-  -webkit-animation: cake 0.32s ease-out forwards;
-  -moz-animation: cake 0.32s ease-out forwards;
-  animation: cake 0.32s ease-out forwards;
+    -webkit-animation: cake 0.32s ease-out 1s forwards;
+    -moz-animation: cake 0.32s ease-out 1s forwards;
+    animation: cake 0.32s ease-out 1s forwards;
 }
 
 @-webkit-keyframes cake {
-	0% {
-		-webkit-transform: translate3d(-50%,-200%);
-  }
-  65% {
-    -webkit-transform: translate3d(-50%,-45%);
-	}
-	100% {
-		-webkit-transform: translate3d(-50%,-50%);
-	}
+    0% {
+        -webkit-transform: translate3d(-50%, -200%, 0);
+    }
+    65% {
+        -webkit-transform: translate3d(-50%, -45%, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(-50%, -50% ,0);
+    }
 }
 
 @-moz-keyframes cake {
-  0% {
-		-moz-transform: translate3d(-50%,-200%);
-  }
-  65% {
-    -moz-transform: translate3d(-50%,-45%);
-	}
-	100% {
-		-moz-transform: translate3d(-50%,-50%);
-	}
+    0% {
+        -moz-transform: translate3d(-50%, -200% ,0);
+    }
+    65% {
+        -moz-transform: translate3d(-50%, -45% ,0);
+    }
+    100% {
+        -moz-transform: translate3d(-50%, -50% ,0);
+    }
 }
 
 @keyframes cake {
-  0% {
-		transform: translate(-50%,-200%);
-  }
-  65% {
-    transform: translate(-50%,-45%);
-	}
-	100% {
-		transform: translate(-50%,-50%);
-	}
+    0% {
+        transform: translate3d(-50%, -200% ,0);
+    }
+    65% {
+        transform: translate3d(-50%, -45% ,0);
+    }
+    100% {
+        transform: translate3d(-50%, -50% ,0);
+    }
 }
+
 
 /* 音乐播放 */
 
 @-webkit-keyframes rotating {
-	0% {
-		-webkit-transform: rotate(0deg)
-	}
-	100% {
-		-webkit-transform: rotate(360deg)
-	}
+    0% {
+        -webkit-transform: rotate(0deg)
+    }
+    100% {
+        -webkit-transform: rotate(360deg)
+    }
 }
 
 @-moz-keyframes rotating {
-	0% {
-		-moz-transform: rotate(0deg)
-	}
-	100% {
-		-moz-transform: rotate(360deg)
-	}
+    0% {
+        -moz-transform: rotate(0deg)
+    }
+    100% {
+        -moz-transform: rotate(360deg)
+    }
 }
 
 @keyframes rotating {
-	0% {
-		transform: rotate(0deg)
-	}
-	100% {
-		transform: rotate(360deg)
-	}
+    0% {
+        transform: rotate(0deg)
+    }
+    100% {
+        transform: rotate(360deg)
+    }
 }
 
 .bgm-btn.rotate {
-  -webkit-animation: rotating 1.2s linear infinite;
-  -moz-animation: rotating 1.2s linear infinite;
-  animation: rotating 1.2s linear infinite;
+    -webkit-animation: rotating 1.2s linear infinite;
+    -moz-animation: rotating 1.2s linear infinite;
+    animation: rotating 1.2s linear infinite;
 }
 
 .bgm-btn {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  z-index: 200;
-  display: block;
-  width: 30px;
-  height: 30px;
-  background-image: url(../images/bgmBtn-fbd2dc.svg);
-  background-size: contain;
-  background-repeat: no-repeat;
-  -webkit-tap-highlight-color:rgba(255,255,255,0);
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 200;
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-image: url(../images/bgmBtn-fbd2dc.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
