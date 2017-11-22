@@ -2,7 +2,7 @@
 var music = document.getElementById('music');
 var musicAudio = document.getElementById('musicAudio');
 musicAudio.load(); // 支持iOS
-musicAudio.play(); // 默认浏览器的自动播放
+// musicAudio.play(); // 默认浏览器的自动播放
 var musicFlag = false;
 
 // 微信配置自动播放
@@ -15,7 +15,9 @@ wx && wx.config({
   signature: '',
   jsApiList: []
 });
-wx && wx.ready(musicAudio.play);
+wx && wx.ready(function(){
+  musicAudio.play();
+});
 
 music.addEventListener('click', function (e) {
   e.preventDefault();
