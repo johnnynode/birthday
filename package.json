@@ -1,8 +1,15 @@
 {
   "dependencies": {
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.0.0",
+    "gulp-html-replace": "^1.6.2",
+    "gulp-imagemin": "^4.0.0",
     "gulp-plumber": "^1.1.0",
+    "gulp-strip-debug": "^1.1.0",
+    "gulp-uglify": "^3.0.0",
     "gulp-watch": "^4.3.11",
     "http-proxy-middleware": "^0.17.4",
     "process": "^0.11.10",

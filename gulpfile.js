@@ -3,13 +3,22 @@ var gulp = require('gulp');
 var connect = require('gulp-connect');
 var proxy = require('http-proxy-middleware');
 var plumber = require('gulp-plumber');
-var process = require('process');
-var sh = require('shelljs');
 var runSequence = require('run-sequence');
 var watch = require('gulp-watch');
+var concat = require('gulp-concat');
+var cleanCSS = require('gulp-clean-css');
+var imagemin = require('gulp-imagemin'); // 压缩图片
+var htmlmin = require('gulp-htmlmin'); // 压缩html
+var htmlreplace = require('gulp-html-replace');
+var stripDebug = require('gulp-strip-debug'); // Strip console, alert, and debugger statements
+var uglify = require('gulp-uglify'); // 压缩js
+var del = require('del'); // 清空文件和文件夹
+var sh = require('shelljs');
+var process = require('process');
 
 // 需要监控的路径
-var watchPath = ['./src'];
+var srcPath = './src';
+var distPath = './dist';
 
 // 使用connect启动一个Web服务器
 gulp.task('connect', function () {
@@ -25,9 +34,9 @@ gulp.task('connect', function () {
 });
 
 gulp.task('watch', function () {
-    gulp.src(watchPath)
+    gulp.src(srcPath)
         .pipe(plumber())
-        .pipe(watch(watchPath))
+        .pipe(watch(srcPath))
         .pipe(connect.reload());
 });
 
@@ -60,4 +69,58 @@ gulp.task('server', function () {
         sh.echo('将要打开浏览器访问：http://localhost:9000');
         sh.exec('gulp open-browser');
     });
+});
+
+// clean task
+gulp.task('clean', function () {
+  return del([
+      distPath + '/**/*'
+  ]);
+});
+
+// css task including sass
+gulp.task('css', function () {
+  gulp.src(srcPath + '/css')
+      .pipe(plumber())
+      .pipe(cleanCSS({rebase: false}))
+      .pipe(concat('app.min.css'))
+      .pipe(gulp.dest(distPath + '/css'));
+});
+
+// imagemin images and output them in dist
+gulp.task('imagemin', function () {
+  gulp.src(srcPath + '/images')
+      .pipe(plumber())
+      .pipe(imagemin())
+      .pipe(gulp.dest(distPath + '/images'));
+});
+
+// js task
+gulp.task('js', function () {
+  gulp.src(srcPath + '/js')
+      .pipe(plumber())
+      .pipe(stripDebug())
+      .pipe(uglify())
+      .pipe(concat('app.bundle.min.js'))
+      .pipe(gulp.dest(distPath + '/js'));
+});
+
+// prepare Index.html for dist - ie. using min files
+gulp.task('index', function () {
+  gulp.src(srcPath + '/index.html')
+      .pipe(plumber())
+      .pipe(htmlreplace({
+          'css': 'css/app.min.css',
+          'js': 'js/app.bundle.min.js',
+      }))
+      .pipe(htmlmin({collapseWhitespace: true}))
+      .pipe(gulp.dest(paths.dist + '/.'));
+});
+
+// 构建任务
+var production = ['index', 'imagemin', 'css', 'js'];
+gulp.task('build',['clean'], function () {
+  runSequence(production, function () {
+      sh.echo('🚂🚂🚂 即将构建完毕！');
+  });
 });
