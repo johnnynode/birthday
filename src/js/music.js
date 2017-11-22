@@ -2,10 +2,12 @@
 var music = document.getElementById('music');
 var musicAudio = document.getElementById('musicAudio');
 musicAudio.load(); // 支持iOS
-// musicAudio.play(); // 默认浏览器的自动播放
+musicAudio.volume = 0.5; //表示的是播放音量为原来的50%
 var musicFlag = false;
 
 // 微信配置自动播放
+// http://res.wx.qq.com/open/js/jweixin-1.0.0.js
+// https://www.cnblogs.com/zhangkeyu/p/6657729.html
 wx && wx.config({
   // 配置信息, 即使不正确也能使用 wx.ready
   debug: false,
@@ -15,8 +17,9 @@ wx && wx.config({
   signature: '',
   jsApiList: []
 });
-wx && wx.ready(function(){
+wx && wx.ready(function () {
   musicAudio.play();
+  musicAudio.volume = 0.5; //表示的是播放音量为原来的50% 并不起作用
 });
 
 music.addEventListener('click', function (e) {
