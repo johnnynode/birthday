@@ -196,8 +196,8 @@ body {
 }
 
 .bgm-btn.rotate {
-  -webkit-animation: rotating 1.2s linear infinite;
-  animation: rotating 1.2s linear infinite;
+  animation-play-state: running;
+  -webkit-animation-play-state: running;
 }
 
 .bgm-btn {
@@ -211,4 +211,8 @@ body {
   background-image: url(../images/bgmBtn-fbd2dc.svg);
   background-size: contain;
   background-repeat: no-repeat;
+  -webkit-animation: rotating 1.2s linear infinite;
+  animation: rotating 1.2s linear infinite;
+  animation-play-state: paused;
+  -webkit-animation-play-state: paused;
 }
