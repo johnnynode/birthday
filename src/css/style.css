@@ -6,6 +6,8 @@ body {
 
 body {
   background: #3791f9;
+  margin: 0;
+  overflow: hidden;
 }
 
 #cake {
@@ -153,10 +155,6 @@ body {
 }
 
 /* 雪花部分 */
-body {
-  margin: 0;
-  overflow: hidden;
-}
 
 .snow-body canvas {
   position: absolute;
@@ -166,13 +164,59 @@ body {
 }
 
 #cake-wrap {
+  overflow: hidden;  
   position: absolute;
+  width:100%;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-100%);
+  -webkit-transform: translate(-50%,-100%);
+}
+
+#cake-wrap.cur {
   top:50%;
   left:50%;
   width:100%;
   overflow: hidden;
-  transform: translate(-50%,-50%);
-  -webkit-transform: translate(-50%,-50%);
+  -webkit-animation: cakeMove 0.32s ease-out forwards;
+  -moz-animation: cakeMove 0.32s ease-out forwards;
+  animation: cakeMove 0.32s ease-out forwards;
+}
+
+@-webkit-keyframes cakeMove {
+	0% {
+		-webkit-transform: translate(-50%,-100%);
+  }
+  65% {
+    -webkit-transform: translate(-50%,-45%);
+	}
+	100% {
+		-webkit-transform: translate(-50%,-50%);
+	}
+}
+
+@-moz-keyframes cakeMove {
+  0% {
+		-moz-transform: translate(-50%,-100%);
+  }
+  65% {
+    -moz-transform: translate(-50%,-45%);
+	}
+	100% {
+		-moz-transform: translate(-50%,-50%);
+	}
+}
+
+@keyframes cakeMove {
+  0% {
+		transform: translate(-50%,-100%);
+  }
+  65% {
+    transform: translate(-50%,-45%);
+	}
+	100% {
+		transform: translate(-50%,-50%);
+	}
 }
 
 /* 音乐播放 */

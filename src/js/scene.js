@@ -15,6 +15,11 @@ var particleImage = new Image();
 particleImage.src = 'images/ParticleSmoke.png';
 
 function init() {
+  // 处理进场动画
+  var cake = document.getElementById('cake-wrap');
+  cake.setAttribute('class', 'cur');
+
+  // 处理雪花
   container = document.createElement('div');
   document.body.appendChild(container);
 
