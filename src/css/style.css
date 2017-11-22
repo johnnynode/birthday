@@ -179,10 +179,19 @@ body {
 
 @-webkit-keyframes rotating {
 	0% {
-		transform: rotate(0deg)
+		-webkit-transform: rotate(0deg)
 	}
-	to {
-		transform: rotate(1turn)
+	100% {
+		-webkit-transform: rotate(360deg)
+	}
+}
+
+@-moz-keyframes rotating {
+	0% {
+		-moz-transform: rotate(0deg)
+	}
+	100% {
+		-moz-transform: rotate(360deg)
 	}
 }
 
@@ -190,13 +199,14 @@ body {
 	0% {
 		transform: rotate(0deg)
 	}
-	to {
-		transform: rotate(1turn)
+	100% {
+		transform: rotate(360deg)
 	}
 }
 
 .bgm-btn.rotate {
   animation-play-state: running;
+  -moz-animation-play-state: running;
   -webkit-animation-play-state: running;
 }
 
@@ -212,8 +222,10 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   -webkit-animation: rotating 1.2s linear infinite;
+  -moz-animation: rotating 1.2s linear infinite;
   animation: rotating 1.2s linear infinite;
   animation-play-state: paused;
+  -moz-animation-play-state: paused;
   -webkit-animation-play-state: paused;
   -webkit-tap-highlight-color:rgba(255,255,255,0);
 }
