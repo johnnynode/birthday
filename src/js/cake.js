@@ -8,6 +8,6 @@ cake.setAttribute('class', 'cur');
 var colorChangeCount = 0;
 cake.addEventListener('click',function() {
   colorChangeCount++;
-  var arr = ['#3791f9','#fc183f','#343b44'];
+  var arr = ['#3791f9','#fc183f','#343a42'];
   document.body.style.backgroundColor = arr[colorChangeCount%3];
 },false)
