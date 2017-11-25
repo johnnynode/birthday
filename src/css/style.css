@@ -22,9 +22,9 @@ body {
 }
 
 #cake-wrap.cur {
-    -webkit-animation: cake 0.32s ease-out 1s forwards;
-    -moz-animation: cake 0.32s ease-out 1s forwards;
-    animation: cake 0.32s ease-out 1s forwards;
+    -webkit-animation: cake 0.3s ease-out 1s forwards;
+    -moz-animation: cake 0.3s ease-out 1s forwards;
+    animation: cake 0.3s ease-out 1s forwards;
 }
 
 @-webkit-keyframes cake {
@@ -32,7 +32,7 @@ body {
         -webkit-transform: translate3d(-50%, -200%, 0);
     }
     65% {
-        -webkit-transform: translate3d(-50%, -45%, 0);
+        -webkit-transform: translate3d(-50%, -35%, 0);
     }
     100% {
         -webkit-transform: translate3d(-50%, -50% ,0);
@@ -44,7 +44,7 @@ body {
         -moz-transform: translate3d(-50%, -200% ,0);
     }
     65% {
-        -moz-transform: translate3d(-50%, -45% ,0);
+        -moz-transform: translate3d(-50%, -35% ,0);
     }
     100% {
         -moz-transform: translate3d(-50%, -50% ,0);
@@ -56,7 +56,7 @@ body {
         transform: translate3d(-50%, -200% ,0);
     }
     65% {
-        transform: translate3d(-50%, -45% ,0);
+        transform: translate3d(-50%, -35% ,0);
     }
     100% {
         transform: translate3d(-50%, -50% ,0);
