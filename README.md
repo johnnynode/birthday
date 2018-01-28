@@ -9,3 +9,6 @@
 
 ### Build
 - $`gulp build` 
+
+### Build Server
+- $`gulp build-server`
