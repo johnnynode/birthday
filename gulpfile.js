@@ -16,10 +16,17 @@ var uglify = require('gulp-uglify'); // 压缩js
 var del = require('del'); // 清空文件和文件夹
 var sh = require('shelljs');
 var process = require('process');
+open = require('gulp-open');
 
 // 需要监控的路径
 var srcPath = './src';
 var distPath = './dist';
+
+var platform = process.platform, // 判断操作系统
+    // 定义一组browser的判断
+    browser = platform === 'linux' ? 'google-chrome' : (
+    platform === 'darwin' ? 'google chrome' : (
+        platform === 'win32' ? 'chrome' : 'firefox'));
 
 // 使用connect启动一个Web服务器
 gulp.task('connect', function () {
@@ -41,26 +48,15 @@ gulp.task('watch', function () {
     .pipe(connect.reload());
 });
 
-// 打开浏览器
-gulp.task('open-browser', function () {
-  var platform = process.platform;
-  var shellStr1 = "open -a '/Applications/Google Chrome.app' 'http://localhost:9000'";
-  var shellStr2 = "start http://localhost:9000";
-  // 打开浏览器方法：
-  var openFunc = function (str, flag) {
-    // 执行并对异常处理
-    if (sh.exec(str).code !== 0) {
-      sh.echo(flag + '下打开浏览器失败,建议您安装chrome并设为默认浏览器!');
-      sh.exit(1);
-    }
+// 打开浏览器的任务
+gulp.task('open', function() {
+  // gulp-open 的选项
+  var browserOptions = {
+      uri: 'http://localhost:9000',
+      app: browser
   };
-  if (platform === 'darwin') {
-    openFunc(shellStr1, 'Mac');
-  } else if (platform === 'win32' || platform === 'win64') {
-    openFunc(shellStr2, 'Windows');
-  } else {
-    sh.echo('现在只支持Mac和windows系统!如果未打开页面，请确认安装chrome并设为默认浏览器!');
-  }
+  gulp.src(srcPath)
+      .pipe(open(browserOptions));
 });
 
 //运行Gulp时,搭建起跨域服务器
@@ -70,7 +66,7 @@ gulp.task('server', function () {
     'connect', 'watch'
   ], function () {
     sh.echo('将要打开浏览器访问：http://localhost:9000');
-    sh.exec('gulp open-browser');
+    sh.exec('gulp open');
   });
 });
 
