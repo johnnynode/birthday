@@ -26,14 +26,24 @@ var platform = process.platform, // 判断操作系统
     // 定义一组browser的判断
     browser = platform === 'linux' ? 'google-chrome' : (
     platform === 'darwin' ? 'google chrome' : (
-        platform === 'win32' ? 'chrome' : 'firefox'));
+        platform === 'win32' ? 'chrome' : 'firefox')),
+    // 定义标识
+    connectFlag = 0, // 用于控制connect任务中的root路径
+    portFlag = 0; // 用于控制端口不同
 
 // 使用connect启动一个Web服务器
 gulp.task('connect', function () {
+  var root = connectFlag ? distPath : srcPath;
+  var hostname = '127.0.0.1';
   connect.server({
-    root: './src',
-    livereload: true,
-    port: 9000,
+    root: root,
+    fallback: root + '/index.html',
+    livereload: {
+      hostname: hostname,
+      enable: true,
+      port: portFlag ? 36000 : 35729
+    },
+    port: portFlag ? 8000 : 9000,
     middleware: function (connect, opt) {
       return []
     }
@@ -52,22 +62,11 @@ gulp.task('watch', function () {
 gulp.task('open', function() {
   // gulp-open 的选项
   var browserOptions = {
-      uri: 'http://localhost:9000',
+      uri: 'http://localhost:' + (portFlag ? '8000' : '9000'), 
       app: browser
   };
   gulp.src(srcPath)
       .pipe(open(browserOptions));
-});
-
-//运行Gulp时,搭建起跨域服务器
-gulp.task('server', function () {
-  sh.echo("服务器开启!");
-  runSequence([
-    'connect', 'watch'
-  ], function () {
-    sh.echo('将要打开浏览器访问：http://localhost:9000');
-    sh.exec('gulp open');
-  });
 });
 
 // clean task
@@ -130,10 +129,26 @@ gulp.task('index', function () {
     .pipe(gulp.dest(distPath + '/.'));
 });
 
+//运行Gulp时,搭建起跨域服务器
+gulp.task('server', function () {
+  connectFlag = 0;
+  portFlag = 0;
+  runSequence(['connect', 'watch', 'open']);
+});
+
 // 构建任务
 var production = ['audio', 'image', 'css', 'js', 'index'];
+
+// 构建任务
 gulp.task('build', ['clean'], function () {
   return runSequence(production, function () {
     sh.echo('🚂🚂🚂 构建完毕！');
   });
+});
+
+// 构建完成 搭建起基于构建后的服务器
+gulp.task('build-server', function () {
+  connectFlag = 1;
+  portFlag = 1;
+  runSequence(['connect', 'open']);
 });
