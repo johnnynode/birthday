@@ -1,4 +1,6 @@
-# 生日蛋糕(birthday cake)
+# 生日(birthday)
+
+蛋糕(cake)、蜡烛(candle)、音乐(music)、雪花(snow)、动画(animation)
 
 ### 克隆(clone)
 
