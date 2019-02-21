@@ -1,14 +1,20 @@
-# Birthday
+# 生日蛋糕(birthday cake)
 
-### Install
+### 克隆(clone)
+
+- $`git clone git@github.com:johnnynode/birthday.git --depth 1` 
+
+### 安装(install)
 
 - $`npm i` or $`yarn install` or $`cnpm i` 
 
-### Run
+### 预览(preview)
 - $`gulp server` 
 
-### Build
+### 构建(build)
+
 - $`gulp build` 
 
-### Build Server
+### 构建后的生产模式(build)
+
 - $`gulp build-server`
